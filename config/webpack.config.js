@@ -348,11 +348,18 @@ module.exports = function (webpackEnv) {
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
+            // svg配置文件
             {
               test: /\.svg$/,
               use: [
                 {loader: 'svg-sprite-loader', options: {}},
-                {loader: 'svgo-loader', options: {}}
+                {
+                  loader: 'svgo-loader', options: {
+                    plugins: [
+                      {removeAttrs: {attrs: 'fill'}}
+                    ]
+                  }
+                }
               ]
             },
             // "url" loader works like "file" loader except that it embeds assets
