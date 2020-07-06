@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 
 const Wrapper = styled.section`
   background: #f5f5f5;
@@ -18,13 +18,17 @@ const Wrapper = styled.section`
     }
   }
 `;
+type Props = {
+  value: string,
+  onChange: (value: string) => void
+}
 
-const NotesSection: React.FunctionComponent = () => {
-  const [note, setNote] = useState<string>('');
+const NotesSection: React.FC<Props> = (props) => {
+  const note = props.value;
   const refInput = useRef<HTMLInputElement>(null);
   const onBlur = () => {
     if (refInput.current) {
-      setNote(refInput.current.value);
+      props.onChange(refInput.current.value);
       console.log(refInput.current.value);
     }
   };
