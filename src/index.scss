@@ -47,6 +47,12 @@ button {
   clear: both;
 }
 
+.oneLine {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .icon {
   width: 1em;
   height: 1em;
