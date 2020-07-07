@@ -21,7 +21,7 @@ function App() {
           <Tags/>
         </Route>
         {/*:tag意思是匹配任意除/的东西*/}
-        <Route exact path="/tags/:tag">
+        <Route exact path="/tags/:id">
           <Tag/>
         </Route>
         <Route exact path="/money">
