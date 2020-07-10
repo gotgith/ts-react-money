@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTags} from '../useTags';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
 import {Button} from '../components/Button';
@@ -28,26 +28,38 @@ const InputWrapper = styled.div`
 `;
 
 const Tag: React.FC = () => {
-  const {findTag, updateTag} = useTags();
+  const {findTag, updateTag, deleteTag} = useTags();
   const {id: idString} = useParams<Params>();  // 把 id 重命名为 idString
   const tag = findTag(parseInt(idString));
+
+  const tagContent = (tag: { id: number, name: string }) => {
+    return (
+      <div>
+        <InputWrapper>
+          <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
+                 onChange={(e) => updateTag(tag.id, {name: e.target.value})}/>
+        </InputWrapper>
+        <Center>
+          <Space/>
+          <Space/>
+          <Space/>
+          <Button onClick={() => deleteTag(tag.id)}>删除标签</Button>
+        </Center>
+      </div>
+    );
+  };
+  const history = useHistory();
+  const onClickBack = () => {
+    history.goBack();
+  };
   return (
     <Layout>
       <TopBar>
-        <Icon name="left"/>
+        <Icon name="left" onClick={onClickBack}/>
         <span>编辑标签</span>
         <Icon/>
       </TopBar>
-      <InputWrapper>
-        <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
-               onChange={(e) => updateTag(tag.id, {name: e.target.value})}/>
-      </InputWrapper>
-      <Center>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Button>删除标签</Button>
-      </Center>
+      {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
     </Layout>
 
   );

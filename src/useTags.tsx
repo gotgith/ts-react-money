@@ -21,15 +21,22 @@ const useTags = () => { //封装一个自定义的 hook(在函数里面使用use
       return result;
     }
   };
-  const updateTag = (id: number, obj: { name: string }) => {
-    let index = findTagIndex(id);
-    // 深拷贝 tags 得到 tagsClone
-    const tagsClone = JSON.parse(JSON.stringify(tags));
-    // 把 tagsClone 的第 index 删除，换成{id: id, name: obj.name}
-    tagsClone.splice(index, 1, {id: id, name: obj.name});  //splice的返回是删除的元素，因此不需要接收返回值，只需要改变tags
-    setTags(tagsClone);
+  const updateTag = (id: number, {name}: { name: string }) => {
+    setTags(tags.map(tag => tag.id === id ? {id, name} : tag));
+
+    // 下面的方法过于繁琐
+    // // 获取要更改的 tag 的下标
+    // let index = findTagIndex(id);
+    // // 深拷贝 tags 得到 tagsClone
+    // const tagsClone = JSON.parse(JSON.stringify(tags));
+    // // 把 tagsClone 的第 index 删除，换成{id: id, name: obj.name}
+    // tagsClone.splice(index, 1, {id: id, name: obj.name});  //splice的返回是删除的元素，因此不需要接收返回值，只需要改变tags
+    // setTags(tagsClone); // 不可变数据，在vue中我们可以直接更改原数据并返回；但是react不能这么做，需要我们深拷贝后在新的数据上操作
   };
-  return {tags, setTags, findTag, updateTag, findTagIndex};
+  const deleteTag = (id: number) => {
+    setTags(tags.filter(tag => tag.id !== id));
+  };
+  return {tags, setTags, findTag, updateTag, findTagIndex, deleteTag};
 };
 
 export {useTags};
