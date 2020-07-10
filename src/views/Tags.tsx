@@ -12,7 +12,6 @@ const TagLists = styled.ol`
   font-size: 16px; 
     background:white;
     > li{
-      //#e5e5e7
       border-bottom: 1px solid #d5d5d9;
       line-height: 20px;
       margin-left: 16px;
@@ -25,17 +24,15 @@ const TagLists = styled.ol`
    }
 `;
 
-
-
 const Tags = () => {
-  const {tags} = useTags();
+  const {tags, addTag} = useTags();
   return (
     <Layout>
       <TagLists>
         {tags.map(tag =>
           <li key={tag.id}>
             <Link to={'/tags/' + tag.id}>
-              <span className="oneLine">{tag.name}</span>
+              <span className="oneLine">{tag.id}:{tag.name}</span>
               <Icon name="right"/>
             </Link>
           </li>)}
@@ -44,7 +41,7 @@ const Tags = () => {
         <Space/>
         <Space/>
         <Space/>
-        <Button>
+        <Button onClick={addTag}>
           新增标签
         </Button>
       </Center>
