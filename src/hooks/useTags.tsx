@@ -18,7 +18,7 @@ const useTags = () => { //封装一个自定义的 hook(在函数里面使用use
   }, []);  // 组件挂载时执行
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
-  }, [tags]);
+  }, tags);
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
   const addTag = () => {
     const tagName = window.prompt('新的标签名为');

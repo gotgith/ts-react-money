@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
 
-const useUpdate = (fn: () => void, deps: any[]) => {
+const useUpdate = (fn: () => void, dependency: any[]) => {
   const count = useRef(0);
   useEffect(() => {
     count.current += 1;
@@ -9,7 +9,7 @@ const useUpdate = (fn: () => void, deps: any[]) => {
     if (count.current > 1) {
       fn();
     }
-  }, deps); // 不可变数据（每次都是新的对象，不是对原本对象的修修补补，react应该是看的是内存地址，而不是看具体的内容）
+  }, [fn, dependency]); // 不可变数据（每次都是新的对象，不是对原本对象的修修补补，react应该是看的是内存地址，而不是看具体的内容）
 };
 
-export {useUpdate}
+export {useUpdate};
