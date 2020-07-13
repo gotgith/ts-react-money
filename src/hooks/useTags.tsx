@@ -26,6 +26,11 @@ const useTags = () => { //封装一个自定义的 hook(在函数里面使用use
       setTags([...tags, {id: createID(), name: tagName}]);
     }
   };
+  const getName = (id: number) => {
+    const tag = tags.filter(item => item.id === id)[0];
+    return tag ? tag.name : '';
+
+  };
   const findTagIndex = (id: number) => {
     let result = -1;  //若是直接返回i，会存在找不到的情况，这样返回的就是tags的length长度，因此需要标记一下，找不到返回result的默认值
     for (let i = 0; i < tags.length; i++) {
@@ -51,7 +56,7 @@ const useTags = () => { //封装一个自定义的 hook(在函数里面使用use
   const deleteTag = (id: number) => {
     setTags(tags.filter(tag => tag.id !== id));
   };
-  return {tags, setTags, findTag, updateTag, findTagIndex, deleteTag, addTag};
+  return {tags, getName, setTags, findTag, updateTag, findTagIndex, deleteTag, addTag};
 };
 
 export {useTags};
