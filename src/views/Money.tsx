@@ -34,10 +34,11 @@ function Money() {
   const {records, addRecord} = useRecords();
   console.log(records);  // 在此处打印
   const submit = () => {
-    addRecord(selected);
-    // console.log(records);  此处打印不出来本次添加的records，因为addRecord有一个setRecords的过程。
-    alert('保存成功');
-    setSelected(defaultFormData);
+    if (addRecord(selected)) {
+      // console.log(records);  此处打印不出来本次添加的records，因为addRecord有一个setRecords的过程。
+      alert('保存成功');
+      setSelected(defaultFormData);
+    }
   };
   return (
     <MyLayout>
