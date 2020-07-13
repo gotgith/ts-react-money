@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
-import {createID} from './lib/createId';
-import {useUpdate} from './hooks/useUpdate';
+import {createID} from '../lib/createId';
+import {useUpdate} from './useUpdate';
 
 const useTags = () => { //封装一个自定义的 hook(在函数里面使用useState等一系列，返回读写接口到外面去，这个函数就是一个自定义hook)
   const [tags, setTags] = useState<{ id: number, name: string }[]>([]);
