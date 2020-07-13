@@ -35,8 +35,7 @@ function Money() {
     });
   };
 
-  const {records, addRecord} = useRecords();
-  console.log(records);  // 在此处打印
+  const {addRecord} = useRecords();
   const submit = () => {
     if (addRecord(selected)) {
       // console.log(records);  此处打印不出来本次添加的records，因为addRecord有一个setRecords的过程。
