@@ -21,7 +21,7 @@ const Layout: React.FC<Props> = (props) => {
   useEffect(() => {
     setTimeout(() => {  // 只所以加setTimeout是因为初始页面为空，无滚动条，也就无法滚动。
       if (!mainRef.current) {return;}
-      mainRef.current.scrollTop = props.scrollTop!; // 因为加了默认值，scollTop不存在为空的情况，加'！'就是排除ts的检查。
+      mainRef.current.scrollTop = props.scrollTop!; // 因为加了默认值，scrollTop不存在为空的情况，加'！'就是排除ts的检查。
     }, 0);
 
   }, [props.scrollTop]);// 钩子，页面渲染之后做的事情
