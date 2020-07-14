@@ -45,7 +45,7 @@ function Money() {
   };
 
   return (
-    <MyLayout>
+    <MyLayout scrollTop={9999}>
       <TagsSection value={selected.tagIds} onChange={tagIds => onChange({tagIds})}/>
       <NotesSection value={selected.note} onChange={note => onChange({note})}/>
       <CategoryWrapper>
